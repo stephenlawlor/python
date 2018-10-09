@@ -1,0 +1,40 @@
+sentence = input("enter a word:  ")
+sentence.strip()
+while sentence.isdigit():
+    print("you must enter only letters")
+    sentence = input("enter a word:  ")
+
+print(sentence)
+newsentence = ''
+
+#each word in the sentence will be split by whitespaces
+for word in sentence.split():
+    #if there are only three letters or less the word can't be jumbled so the word is just concatenated to the new sentence
+    if len(word)<=3:
+        newsentence += word+' '
+    #if there are more than three letters the word is split into three parts, the first and last letters
+    #and then everything else
+    else:
+        first = word[0]
+        last = word[-1]
+        remainder: str = word[1:-1]
+
+        index = 0
+        jumble=''
+        even = ''
+        odd = ''
+        #to jumble the letters a loop is used and all even and odd indexed letters are grouped seperatly
+        while index<len(remainder):
+            if (index%2)==0:
+                even +=remainder[index]
+                index+=1
+            else:
+                odd +=remainder[index]
+                index+=1
+
+            #once the letters are split they are rejoined into a jumbled string
+            jumble=odd+even
+        #the first, last and jumbled letters are then concatenated into the new sentence
+        newsentence+=first+jumble+last+' '
+
+print(newsentence)
